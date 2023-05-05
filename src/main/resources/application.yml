@@ -1,0 +1,118 @@
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure:
+            jdbc:
+              #DataSourceInitializerInvoker: DEBUG
+      hibernate:
+        #SQL: DEBUG
+server:
+  error:
+    whitelabel:
+      enabled: true
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 1200000
+      maximum-pool-size: 5
+      minimum-idle: 2
+      pool-name: data-source
+    url: jdbc:mysql://localhost:3306/pandora?useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+    password: root
+    username: root
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jackson:
+    date-format: MMMM dd yyyy / HH:mm
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: true
+  mail:
+    host: smtp.zoho.com
+    port: 587
+    host_address: host_address
+    username: administrador@pandoralivros.dev.br
+    password: YG66kDdw8RQ9
+    properties:
+      mail:
+        #debug: true
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          starttls:
+            enable: true
+            required: true
+          timeout: 5000
+          writetimeout: 5000
+    protocol: smtp
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  security:
+    public-pattern: /api/public/**
+    auth:
+      username: user_name
+      url: http://localhost:8081/oauth/check_token
+      client_id: client_id
+      client_password: client_password
+      connection_timeout: 60
+      read_timeout: 60
+      whitelist: >
+        /,
+        /v2/api-docs,
+        /swagger-resources,
+        /swagger-resources/**,
+        /configuration/ui,
+        /configuration/security,
+        /swagger-ui.html,
+        /webjars/**,
+        /api/public/**,
+        /api/public/google-auth/**,
+        /oauth2/callback/google
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 186730369443-t65ij8igqirdcrlrnp6hmtaq9u7bg77m.apps.googleusercontent.com
+            clientSecret: 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
+            redirect-uri-template: http://localhost:8080/login/oauth2/code/{registrationId}
+            scope:
+              - email
+              - profile
+            #facebook:
+            #clientId: 974004276834842
+            #clientSecret: 5ef099fe2d507816bfef2763b2e973d7
+        provider:
+          #facebook:
+          #user-info-uri: https://graph.facebook.com/me?fields=id,name,email,picture
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://www.googleapis.com/oauth2/v4/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            user-name-attribute: name
+
+jwt:
+  secret: secret
+  expiration: 86400000
+swagger:
+  host:
+    address: localhost:8080
+    path: /
+  api:
+    name: Pandora Api Documentation
+    version: v1
+  contact:
+    name: Luana Kunzler
+    url: https://www.pandora.com
+    email: luanakdelima@gmail.com
+
