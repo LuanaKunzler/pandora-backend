@@ -13,6 +13,7 @@ public class BookDetailsResponseConverter implements Function<Book, BookDetailsR
     @Override
     public BookDetailsResponse apply(Book book) {
         BookDetailsResponse bookDetailsResponse = new BookDetailsResponse();
+        bookDetailsResponse.setId(book.getId());
         bookDetailsResponse.setTitle(book.getTitle());
         bookDetailsResponse.setLongDesc(book.getLongDesc());
         bookDetailsResponse.setBookCategory(CategoryDTO.builder().name(book.getBookCategory().getName()).build());
@@ -23,7 +24,9 @@ public class BookDetailsResponseConverter implements Function<Book, BookDetailsR
         bookDetailsResponse.setLanguage(book.getLanguage());
         bookDetailsResponse.setImageUrl(book.getImageUrl());
         bookDetailsResponse.setBookUrl(book.getBookUrl());
-
+        bookDetailsResponse.setUnitPrice(book.getUnitPrice());
+        bookDetailsResponse.setCargoPrice(book.getCargoPrice());
+        bookDetailsResponse.setUnitsInStock(book.getUnitsInStock());
 
         return bookDetailsResponse;
     }

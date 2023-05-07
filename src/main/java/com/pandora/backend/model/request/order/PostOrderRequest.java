@@ -34,7 +34,7 @@ public class PostOrderRequest {
     private String state;
 
     @NotBlank
-    @Size(min = 5, max = 6)
+    @Size(min = 5, max = 8)
     @Pattern(regexp = "^[0-9]*$")
     private String zip;
 

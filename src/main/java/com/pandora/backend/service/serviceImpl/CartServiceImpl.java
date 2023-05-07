@@ -243,17 +243,16 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart calculatePrice(Cart cart) {
         cart.setTotalCartPrice(0F);
-        cart.setTotalCargoPrice(0F);
+        cart.setTotalCargoPrice(12.99f);
         cart.setTotalPrice(0F);
 
         cart.getCartItemList().forEach(cartItem -> {
             cart.setTotalCartPrice(cart.getTotalCartPrice() +
                     (cartItem.getBook().getUnitPrice()) * cartItem.getAmount());
-            cart.setTotalCargoPrice(cart.getTotalCargoPrice() +
-                    (cartItem.getBook().getCargoPrice()) * cartItem.getAmount());
+            cart.setTotalCargoPrice(12.99f);
             cart.setTotalPrice(
                     cart.getTotalPrice() + (cartItem.getBook().getUnitPrice() +
-                            cartItem.getBook().getCargoPrice()) * cartItem.getAmount());
+                            cart.getTotalCargoPrice()) * cartItem.getAmount());
         });
 
         if (Objects.nonNull(cart.getDiscount())) {
@@ -261,14 +260,9 @@ public class CartServiceImpl implements CartService {
                     cart.getDiscount().getDiscountPercent()) / 100));
         }
 
-        cart.setTotalPrice(roundTwoDecimals(cart.getTotalPrice()));
-        cart.setTotalCargoPrice(roundTwoDecimals(cart.getTotalCargoPrice()));
+        cart.setTotalPrice(cart.getTotalPrice());
+        cart.setTotalCargoPrice(cart.getTotalCargoPrice());
         return cart;
-    }
-
-    private float roundTwoDecimals(float d) {
-        DecimalFormat twoDForm = new DecimalFormat("#.##");
-        return Float.parseFloat(twoDForm.format(d));
     }
 
     private Cart createCart(User user) {

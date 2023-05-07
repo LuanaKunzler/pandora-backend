@@ -162,9 +162,9 @@ public class BookServiceImpl implements BookService {
     private Sort getSort(String sort) {
         switch (sort) {
             case "lowest":
-                return Sort.by(Sort.Direction.ASC, "price");
+                return Sort.by(Sort.Direction.ASC, "unitPrice");
             case "highest":
-                return Sort.by(Sort.Direction.DESC, "price");
+                return Sort.by(Sort.Direction.DESC, "unitPrice");
             default:
                 return null;
         }

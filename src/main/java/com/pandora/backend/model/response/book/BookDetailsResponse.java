@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class BookDetailsResponse {
 
+    private Long id;
     private String title;
     private String longDesc;
     private CategoryDTO bookCategory;
@@ -17,6 +18,8 @@ public class BookDetailsResponse {
     private String language;
     private String imageUrl;
     private String bookUrl;
-
+    private Float unitPrice;
+    private Float cargoPrice;
+    private Integer unitsInStock;
 
 }

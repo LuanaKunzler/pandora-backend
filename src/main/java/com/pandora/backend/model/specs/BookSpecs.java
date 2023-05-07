@@ -10,7 +10,7 @@ public final class BookSpecs {
             if (category == null) {
                 return cb.isTrue(cb.literal(true));
             }
-            return cb.equal(root.join("book").join("bookCategory").get("name"), category);
+            return cb.equal(root.get("bookCategory").get("name"), category);
         };
     }
 
@@ -19,25 +19,25 @@ public final class BookSpecs {
             if (author == null) {
                 return cb.isTrue(cb.literal(true));
             }
-            return cb.equal(root.get("author").get("name"), author);
+            return cb.equal(root.get("bookAuthor").get("name"), author);
         };
     }
 
-    public static Specification<Book> maxPrice(Float price) {
+    public static Specification<Book> maxPrice(Float unitPrice) {
         return (root, query, cb) -> {
-            if (price == null) {
+            if (unitPrice == null) {
                 return cb.isTrue(cb.literal(true));
             }
-            return cb.lessThan(root.get("price"), price);
+            return cb.lessThan(root.get("unitPrice"), unitPrice);
         };
     }
 
-    public static Specification<Book> minPrice(Float price) {
+    public static Specification<Book> minPrice(Float unitPrice) {
         return (root, query, cb) -> {
-            if (price == null) {
+            if (unitPrice == null) {
                 return cb.isTrue(cb.literal(true));
             }
-            return cb.greaterThanOrEqualTo(root.get("price"), price);
+            return cb.greaterThanOrEqualTo(root.get("unitPrice"), unitPrice);
         };
     }
 

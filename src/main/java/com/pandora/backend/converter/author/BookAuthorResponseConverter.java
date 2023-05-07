@@ -13,7 +13,7 @@ public class BookAuthorResponseConverter implements Function<BookAuthor, BookAut
     @Override
     public BookAuthorResponse apply(BookAuthor bookAuthor) {
         BookAuthorResponse bookAuthorResponse = new BookAuthorResponse();
-        bookAuthorResponse.setAuthor(AuthorDTO.builder().name(bookAuthor.getName()).build());
+        bookAuthorResponse.setName(bookAuthor.getName());
         return bookAuthorResponse;
     }
 

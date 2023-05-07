@@ -30,7 +30,7 @@ public class BookCacheServiceImpl implements BookCacheService {
     }
 
     @Override
-    @Cacheable(key = "#url")
+    @Cacheable(key = "{#root.methodName,#id}")
     public Book findById(Long id) {
         return bookRepository.findById(id).orElse(null);
     }
