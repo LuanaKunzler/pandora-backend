@@ -2,6 +2,7 @@ package com.pandora.backend.controller;
 
 import com.pandora.backend.model.request.user.*;
 import com.pandora.backend.model.entity.User;
+import com.pandora.backend.service.AuthService;
 import com.pandora.backend.service.TokenService;
 import com.pandora.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,26 +14,26 @@ import javax.validation.Valid;
 
 @RestController
 public class PublicUserController extends PublicApiController {
-    private final UserService userService;
+    private final AuthService authService;
 
     private final TokenService tokenService;
 
     @Autowired
-    public PublicUserController(UserService userService, TokenService tokenService) {
-        this.userService = userService;
+    public PublicUserController(AuthService authService, TokenService tokenService) {
+        this.authService = authService;
         this.tokenService = tokenService;
     }
 
     @PostMapping(value = "/account/registration")
     public ResponseEntity<HttpStatus> registerUser(@RequestBody @Valid RegisterUserRequest registerUserRequest) {
-        User user = userService.register(registerUserRequest);
+        User user = authService.register(registerUserRequest);
         tokenService.createEmailConfirmToken(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/account/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        return userService.authenticateUser(loginRequest);
+        return authService.authenticateUser(loginRequest);
     }
 
     @PostMapping(value = "/account/registration/validate")

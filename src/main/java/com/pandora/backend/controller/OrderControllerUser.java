@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-public class OrderController extends ApiController {
+public class OrderControllerUser extends ApiUserController {
 
     private final OrderService orderService;
 
     @Autowired
-    public OrderController(OrderService orderService) {
+    public OrderControllerUser(OrderService orderService) {
         this.orderService = orderService;
     }
 

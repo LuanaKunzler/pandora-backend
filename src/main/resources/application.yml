@@ -89,12 +89,7 @@ spring:
             scope:
               - email
               - profile
-            #facebook:
-            #clientId: 974004276834842
-            #clientSecret: 5ef099fe2d507816bfef2763b2e973d7
         provider:
-          #facebook:
-          #user-info-uri: https://graph.facebook.com/me?fields=id,name,email,picture
           google:
             authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
             token-uri: https://www.googleapis.com/oauth2/v4/token

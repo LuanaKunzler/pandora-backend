@@ -21,4 +21,6 @@ public class GoogleSignUpRequest {
 
     @NotBlank(message = "O campo 'provider' é obrigatório.")
     private String provider;
+
+    private String idToken;
 }

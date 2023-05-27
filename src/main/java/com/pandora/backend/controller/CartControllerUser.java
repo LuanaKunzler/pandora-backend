@@ -6,19 +6,17 @@ import com.pandora.backend.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
-@PreAuthorize("hasRole('USER')")
-public class CartController extends ApiController {
+public class CartControllerUser extends ApiUserController {
 
     private final CartService cartService;
 
     @Autowired
-    public CartController(CartService cartService) {
+    public CartControllerUser(CartService cartService) {
         this.cartService = cartService;
     }
 

@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-public class DiscountController extends ApiController {
+public class DiscountControllerUser extends ApiUserController {
 
     private final DiscountService discountService;
 
     @Autowired
-    public DiscountController(DiscountService discountService) {
+    public DiscountControllerUser(DiscountService discountService) {
         this.discountService = discountService;
     }
 

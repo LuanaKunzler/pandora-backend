@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api/public")
-public class PublicApiController {
+@RequestMapping("/api/admin")
+@PreAuthorize("hasRole('ADMIN')")
+public class ApiAdminController {
 }

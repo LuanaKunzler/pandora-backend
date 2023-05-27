@@ -7,10 +7,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface UserService {
 
-    User register(RegisterUserRequest registerUserRequest);
-
-    User registerFromGoogle(GoogleSignUpRequest googleSignUpRequest);
-
     UserResponse fetchUser();
 
     User getUser();
@@ -28,9 +24,5 @@ public interface UserService {
     void resetPassword(PasswordResetRequest passwordResetRequest);
 
     Boolean getVerificationStatus();
-
-    ResponseEntity<?> authenticateUser(LoginRequest loginRequest);
-
-    ResponseEntity<?> authenticateFromGoogle(GoogleSignInRequest googleSignInRequest);
 
 }
