@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/api/user")
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 public class ApiUserController {
 }

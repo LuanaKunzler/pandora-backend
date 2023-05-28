@@ -5,8 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.annotation.security.PermitAll;
+
 @Controller
 @RequestMapping("/")
+@PermitAll
 public class IndexController {
 
     @GetMapping

@@ -22,5 +22,4 @@ public class RegisterUserRequest {
 
     @Size(min = 6, max = 52)
     private String passwordRepeat;
-
 }

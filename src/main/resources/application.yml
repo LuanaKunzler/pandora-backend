@@ -62,7 +62,6 @@ spring:
     public-pattern: /api/public/**
     auth:
       username: user_name
-      url: http://localhost:8081/oauth/check_token
       client_id: client_id
       client_password: client_password
       connection_timeout: 60
