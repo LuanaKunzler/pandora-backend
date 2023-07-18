@@ -1,7 +1,9 @@
 package com.pandora.backend.model.entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,7 +37,7 @@ public class Book {
     private BookAuthor bookAuthor;
 
     @Column(name = "isbn")
-    private Integer isbn;
+    private String isbn;
 
     @Column(name = "book_edition")
     private String bookEdition;
@@ -46,8 +48,9 @@ public class Book {
     @Column(name = "language")
     private String language;
 
+    @Lob
     @Column(name = "image_url")
-    private String imageUrl;
+    private byte[] imageUrl;
 
     @Column(name = "book_url")
     private String bookUrl;
@@ -64,11 +67,14 @@ public class Book {
     @Column(name = "sell_count")
     private Integer sellCount;
 
-    @Column(name = "date_created", insertable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @Column(name = "date_created")
     private Date dateCreated;
 
-    @Column(name = "last_updated", insertable = false)
-    @Type(type = "timestamp")
+    @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
+    @Column(name = "last_updated")
     private Date lastUpdated;
 
     @Column(name = "is_active")

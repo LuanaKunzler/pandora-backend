@@ -12,7 +12,7 @@ public class BookDetailsResponse {
     private String longDesc;
     private CategoryDTO bookCategory;
     private AuthorDTO author;
-    private Integer isbn;
+    private String isbn;
     private String bookEdition;
     private Integer numberOfPages;
     private String language;

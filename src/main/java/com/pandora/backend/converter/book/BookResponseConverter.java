@@ -4,6 +4,7 @@ import com.pandora.backend.model.entity.Book;
 import com.pandora.backend.model.response.book.BookResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.Base64;
 import java.util.function.Function;
 
 @Component
@@ -21,7 +22,8 @@ public class BookResponseConverter implements Function<Book, BookResponse> {
         bookResponse.setBookEdition(book.getBookEdition());
         bookResponse.setNumberOfPages(book.getNumberOfPages());
         bookResponse.setLanguage(book.getLanguage());
-        bookResponse.setImageUrl(book.getImageUrl());
+        String imageUrl = convertBlobToUrl(book.getImageUrl());
+        bookResponse.setImageUrl(imageUrl);
         bookResponse.setBookUrl(book.getBookUrl());
         bookResponse.setUnitPrice(book.getUnitPrice());
         bookResponse.setCargoPrice(book.getCargoPrice());
@@ -31,6 +33,12 @@ public class BookResponseConverter implements Function<Book, BookResponse> {
         bookResponse.setLastUpdated(book.getLastUpdated());
         bookResponse.setIsActive(book.getIsActive());
         return bookResponse;
+    }
+
+    public String convertBlobToUrl(byte[] blob) {
+        String base64Image = Base64.getEncoder().encodeToString(blob);
+        String imageUrl = "data:image/jpeg;base64," + base64Image;
+        return imageUrl;
     }
 
 }

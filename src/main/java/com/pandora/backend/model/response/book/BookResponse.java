@@ -13,7 +13,7 @@ public class BookResponse {
     private String longDesc;
     private BookCategory bookCategory;
     private BookAuthor bookAuthor;
-    private Integer isbn;
+    private String isbn;
     private String bookEdition;
     private Integer numberOfPages;
     private String language;

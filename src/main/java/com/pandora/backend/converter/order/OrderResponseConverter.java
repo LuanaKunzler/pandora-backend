@@ -7,6 +7,7 @@ import com.pandora.backend.model.entity.Order;
 import com.pandora.backend.model.response.order.OrderResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.Base64;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -40,12 +41,13 @@ public class OrderResponseConverter implements Function<Order, OrderResponse> {
             );
         }
 
+
         orderResponse.setOrderItems(
                 order.getOrderDetailList()
                         .stream()
                         .map(orderDetails -> OrderDetailDTO
                                 .builder()
-                                .imageUrl(orderDetails.getBook().getImageUrl())
+                                .imageUrl(convertBlobToUrl(orderDetails.getBook().getImageUrl()))
                                 .bookUrl(orderDetails.getBook().getBookUrl())
                                 .title(orderDetails.getBook().getTitle())
                                 .price(orderDetails.getBook().getUnitPrice())
@@ -60,5 +62,11 @@ public class OrderResponseConverter implements Function<Order, OrderResponse> {
         );
 
         return orderResponse;
+    }
+
+    public String convertBlobToUrl(byte[] blob) {
+        String base64Image = Base64.getEncoder().encodeToString(blob);
+        String imageUrl = "data:image/jpeg;base64," + base64Image;
+        return imageUrl;
     }
 }

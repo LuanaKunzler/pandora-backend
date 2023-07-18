@@ -6,6 +6,7 @@ import com.pandora.backend.model.entity.Cart;
 import com.pandora.backend.model.response.cart.CartResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.Base64;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ public class CartResponseConverter implements Function<Cart, CartResponse> {
                         .builder()
                         .id(cartItem.getId())
                         .bookUrl(cartItem.getBook().getBookUrl())
-                        .imageUrl(cartItem.getBook().getImageUrl())
+                        .imageUrl(convertBlobToUrl(cartItem.getBook().getImageUrl()))
                         .title(cartItem.getBook().getTitle())
                         .price(cartItem.getBook().getUnitPrice())
                         .amount(cartItem.getAmount())
@@ -43,5 +44,11 @@ public class CartResponseConverter implements Function<Cart, CartResponse> {
         cartResponse.setTotalCargoPrice(cart.getTotalCargoPrice());
         cartResponse.setTotalPrice(cart.getTotalPrice());
         return cartResponse;
+    }
+
+    public String convertBlobToUrl(byte[] blob) {
+        String base64Image = Base64.getEncoder().encodeToString(blob);
+        String imageUrl = "data:image/jpeg;base64," + base64Image;
+        return imageUrl;
     }
 }

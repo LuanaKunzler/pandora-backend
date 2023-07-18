@@ -1,5 +1,6 @@
 package com.pandora.backend.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +22,7 @@ public class Discount {
     private Long id;
 
     @OneToMany(mappedBy = "discount")
+    @JsonIgnore
     private List<Order> orderList;
 
     @OneToMany(mappedBy = "discount")

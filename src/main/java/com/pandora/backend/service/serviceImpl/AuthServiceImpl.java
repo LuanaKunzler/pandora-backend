@@ -75,7 +75,13 @@ public class AuthServiceImpl implements AuthService {
                 user.setSocialId(googleSignUpRequest.getProviderId());
                 user.setEnabled(true);
 
-                Set<String> strRoles = new HashSet<>();
+                Optional<Role> userRoleOptional = roleRepository.findByName(RoleType.ROLE_USER);
+                Role userRole = userRoleOptional.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                Set<Role> roles = new HashSet<>();
+                roles.add(userRole);
+                user.setRoles(roles);
+
+                /*Set<String> strRoles = new HashSet<>();
                 Role role = new Role(RoleType.ROLE_USER);
                 strRoles.add(role.getName().toString());
 
@@ -92,9 +98,8 @@ public class AuthServiceImpl implements AuthService {
                         roles.add(userRole);
                     }
                 });
-                user.setRoles(roles);
-                var userSaved = userRepository.save(user);
-                return ResponseEntity.ok(userSaved);
+                user.setRoles(roles);*/
+                return ResponseEntity.ok(userRepository.save(user));
 
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new MessageResponse("Erro ao cadastrar usuário com o Google"));
@@ -146,7 +151,7 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
-    private boolean isValidToken(String idToken) {
+    public boolean isValidToken(String idToken) {
         try {
             List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
             if (firebaseApps.isEmpty()) {
@@ -176,7 +181,7 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(registerUserRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerUserRequest.getPassword()));
         user.setEmailVerified(0);
-        user.setSocialProvider("LOCAL");
+        user.setSocialProvider("USER");
         user.setEnabled(true);
 
         Set<String> strRoles = new HashSet<>();

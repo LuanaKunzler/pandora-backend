@@ -7,7 +7,7 @@ logging:
             jdbc:
               #DataSourceInitializerInvoker: DEBUG
       hibernate:
-        #SQL: DEBUG
+        SQL: DEBUG
 server:
   error:
     whitelabel:
@@ -21,9 +21,9 @@ spring:
       maximum-pool-size: 5
       minimum-idle: 2
       pool-name: data-source
-    url: jdbc:mysql://localhost:3306/pandora?useSSL=false&useUnicode=yes&characterEncoding=UTF-8
-    password: root
-    username: root
+    url: ${DATABASE_URL}
+    password: ${DATABASE_PASSWORD}
+    username: ${DATABASE_USERNAME}
     testWhileIdle: true
     validationQuery: SELECT 1
   jackson:
@@ -41,11 +41,11 @@ spring:
     host: smtp.zoho.com
     port: 587
     host_address: host_address
-    username: administrador@pandoralivros.dev.br
-    password: YG66kDdw8RQ9
+    username: ${ZOHO_USERNAME}
+    password: ${ZOHO_PASSWORD}
     properties:
       mail:
-        #debug: true
+        debug: true
         smtp:
           auth: true
           connectiontimeout: 5000
@@ -56,14 +56,17 @@ spring:
           writetimeout: 5000
     protocol: smtp
   mvc:
+    view:
+      prefix: /reports/
+      suffix: .jrxml
     throw-exception-if-no-handler-found: true
 
   security:
     public-pattern: /api/public/**
     auth:
-      username: user_name
-      client_id: client_id
-      client_password: client_password
+      username: ${AUTH_USERNAME}
+      client_id: ${AUTH_CLIENT_ID}
+      client_password: ${AUTH_CLIENT_PASSWORD}
       connection_timeout: 60
       read_timeout: 60
       whitelist: >
@@ -82,8 +85,8 @@ spring:
       client:
         registration:
           google:
-            clientId: 186730369443-t65ij8igqirdcrlrnp6hmtaq9u7bg77m.apps.googleusercontent.com
-            clientSecret: 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
+            clientId: ${GOOGLE_CLIENT_ID}
+            clientSecret: ${GOOGLE_CLIENT_SECRET}
             redirect-uri-template: http://localhost:8080/login/oauth2/code/{registrationId}
             scope:
               - email
@@ -96,7 +99,7 @@ spring:
             user-name-attribute: name
 
 jwt:
-  secret: secret
+  secret: ${JWT_SECRET}
   expiration: 86400000
 swagger:
   host:

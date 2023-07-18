@@ -2,6 +2,7 @@ package com.pandora.backend.model.response.order;
 
 import com.pandora.backend.model.dto.DiscountDTO;
 import com.pandora.backend.model.dto.OrderDetailDTO;
+import com.pandora.backend.model.entity.OrderStatus;
 import lombok.Data;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class OrderResponse {
 
     private Long date;
 
-    private Integer shipped;
+    private OrderStatus shipped;
 
     private String cargoFirm;
 

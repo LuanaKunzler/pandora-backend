@@ -7,23 +7,23 @@ import javax.validation.constraints.Size;
 
 @Data
 public class UpdateUserAddressRequest {
-    @Pattern(regexp = "[0-9a-zA-Z #,-]+")
+    @Pattern(regexp = "^[0-9a-zA-ZÀ-ÿ\\s#,\\-]+$")
     @Size(min = 3, max = 240)
     private String address;
 
-    @Pattern(regexp = "^[a-zA-Z\\s]+$")
+    @Pattern(regexp = "^[a-zA-ZÀ-ÿ\\s]+$")
     @Size(min = 3, max = 100)
     private String city;
 
-    @Pattern(regexp = "^[a-zA-Z\\s]+$")
+    @Pattern(regexp = "^[a-zA-ZÀ-ÿ\\s]+$")
     @Size(min = 2, max = 40)
     private String state;
 
-    @Pattern(regexp = "^[0-9]*$")
-    @Size(min = 5, max = 8)
+    @Pattern(regexp = "^[0-9-]*$")
+    @Size(min = 5, max = 9)
     private String zip;
 
-    @Pattern(regexp = "^[a-zA-Z\\s]+$")
+    @Pattern(regexp = "^[a-zA-ZÀ-ÿ\\s]+$")
     @Size(min = 3, max = 40)
     private String country;
 }

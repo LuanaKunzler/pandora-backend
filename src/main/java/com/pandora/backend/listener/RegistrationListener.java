@@ -25,7 +25,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
         String recipientAddress = event.getUser().getEmail();
         String subject = "\uD83D\uDD11 Pandora Confirmação de Registro";
-        String confirmationUrl = "http://localhost:4200/registrationConfirm?token=" + event.getToken();
+        String confirmationUrl = "https://pandoralivros.dev.br/registrationConfirm?token=" + event.getToken();
         String message = "Olá,\n\nPor favor, confirme seu e-mail com com o link abaixo. ";
 
         SimpleMailMessage email = new SimpleMailMessage();

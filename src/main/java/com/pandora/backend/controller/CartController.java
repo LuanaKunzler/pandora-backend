@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-public class CartControllerUser extends ApiUserController {
+public class CartController extends ApiUserController {
 
     private final CartService cartService;
 
     @Autowired
-    public CartControllerUser(CartService cartService) {
+    public CartController(CartService cartService) {
         this.cartService = cartService;
     }
 

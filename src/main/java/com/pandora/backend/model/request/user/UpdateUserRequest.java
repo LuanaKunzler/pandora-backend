@@ -8,11 +8,11 @@ import javax.validation.constraints.Size;
 @Data
 public class UpdateUserRequest {
 
-    @Pattern(regexp = "^[a-zA-Z\\s]+$")
+    @Pattern(regexp = "^[0-9a-zA-ZÀ-ÿ\\s#,\\-]+$")
     @Size(min = 3, max = 26)
     private String firstName;
 
-    @Pattern(regexp = "^[a-zA-Z\\s]+$")
+    @Pattern(regexp = "^[0-9a-zA-ZÀ-ÿ\\s#,\\-]+$")
     @Size(min = 3, max = 26)
     private String lastName;
 

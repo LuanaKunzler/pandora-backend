@@ -1,4 +1,4 @@
-package com.pandora.backend.controller;
+package com.pandora.backend.controller.adminController;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

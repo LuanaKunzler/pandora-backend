@@ -3,10 +3,7 @@ package com.pandora.backend.service.serviceImpl;
 import com.pandora.backend.converter.order.OrderResponseConverter;
 import com.pandora.backend.error.exception.InvalidArgumentException;
 import com.pandora.backend.error.exception.ResourceNotFoundException;
-import com.pandora.backend.model.entity.Cart;
-import com.pandora.backend.model.entity.Order;
-import com.pandora.backend.model.entity.OrderDetail;
-import com.pandora.backend.model.entity.User;
+import com.pandora.backend.model.entity.*;
 import com.pandora.backend.model.request.order.PostOrderRequest;
 import com.pandora.backend.model.response.order.OrderResponse;
 import com.pandora.backend.repository.OrderRepository;
@@ -28,18 +25,16 @@ public class OrderServiceImpl implements OrderService {
     private final CartService cartService;
     private final OrderResponseConverter orderResponseConverter;
 
-
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository,
-                            UserService userService,
-                            CartService cartService,
-                            OrderResponseConverter orderResponseConverter) {
+            UserService userService,
+            CartService cartService,
+            OrderResponseConverter orderResponseConverter) {
         this.orderRepository = orderRepository;
         this.userService = userService;
         this.cartService = cartService;
         this.orderResponseConverter = orderResponseConverter;
     }
-
 
     @Override
     public Integer getAllOrdersCount() {
@@ -89,7 +84,15 @@ public class OrderServiceImpl implements OrderService {
         saveOrder.setOrderDetailList(new ArrayList<>());
 
         cart.getCartItemList().forEach(cartItem -> {
-            cartItem.getBook().setSellCount(cartItem.getBook().getSellCount() + cartItem.getAmount());
+            Book book = cartItem.getBook();
+            Integer sellCount = book.getSellCount();
+            int currentSellCount = sellCount != null ? sellCount : 0;
+            book.setSellCount(currentSellCount + cartItem.getAmount());
+
+            int currentUnitsInStock = book.getUnitsInStock();
+            int updatedUnitsInStock = currentUnitsInStock - cartItem.getAmount();
+            book.setUnitsInStock(updatedUnitsInStock);
+
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setAmount(cartItem.getAmount());
             orderDetail.setOrder(saveOrder);
@@ -100,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
         saveOrder.setTotalPrice(cart.getTotalPrice());
         saveOrder.setTotalCargoPrice(cart.getTotalCargoPrice());
         saveOrder.setDiscount(cart.getDiscount());
-        saveOrder.setShipped(0);
+        saveOrder.setShipped(OrderStatus.IN_PREPARATION);
 
         Order order = orderRepository.save(saveOrder);
         cartService.emptyCart();

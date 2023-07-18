@@ -1,5 +1,7 @@
 package com.pandora.backend.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +29,7 @@ public class Order {
     private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<OrderDetail> orderDetailList;
 
     @OneToOne
@@ -68,7 +71,7 @@ public class Order {
     private Date date;
 
     @Column(name = "shipped")
-    private Integer shipped;
+    private OrderStatus shipped;
 
     @Column(name = "cargo_firm")
     private String cargoFirm;

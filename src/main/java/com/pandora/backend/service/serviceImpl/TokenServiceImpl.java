@@ -49,7 +49,7 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public void createEmailConfirmToken(User user) {
-        if (user.getSocialProvider() == "LOCAL") {
+        if ("USER".equals(user.getSocialProvider()) || "ADMIN".equals(user.getSocialProvider())) {
             String token = UUID.randomUUID().toString();
             VerificationToken verificationToken = new VerificationToken();
             verificationToken.setToken(token);

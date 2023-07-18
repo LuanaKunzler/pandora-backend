@@ -25,7 +25,7 @@ public class PasswordForgotListener implements ApplicationListener<OnPasswordFor
     private void confirmRegistration(OnPasswordForgotRequestEvent event) {
         String recipientAddress = event.getUser().getEmail();
         String subject = "\uD83D\uDD11 Pandora Redefinição de Senha";
-        String confirmationUrl = "http://localhost:4200/passwordResetConfirm?token=" + event.getToken();
+        String confirmationUrl = "https://pandoralivros.dev.br/passwordResetConfirm?token=" + event.getToken();
         String message = "Olá,\n\nPor favor redefina sua senha com o link abaixo.";
 
         SimpleMailMessage email = new SimpleMailMessage();

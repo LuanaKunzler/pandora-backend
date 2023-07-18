@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-public class UserControllerUser extends ApiUserController {
+public class UserController extends ApiUserController {
 
     private final UserService userService;
 
     @Autowired
-    public UserControllerUser(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
